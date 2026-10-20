@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Te amo</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0b0e;--fg:#f3efe9;--mut:#9b958c;--red:#e5262e;--glow:#ff3b3b;--card:#15151a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--fg);font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;overflow-x:hidden;line-height:1.5}
+.f{font-family:"Bebas Neue",Impact,"Arial Black",sans-serif;letter-spacing:.04em}
+#gate{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:24px;transition:opacity 1s}
+#gate h2{font-size:clamp(2rem,7vw,3.4rem);font-weight:400}
+#gate p{color:var(--mut);font-size:1.15rem}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--red);color:#fff;border:0;padding:14px 40px;font-size:1.5rem;letter-spacing:.12em;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);box-shadow:0 0 30px #e5262e88;transition:transform .2s}
+.btn:hover{transform:scale(1.06)}
+.beams{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.beams i{position:absolute;top:-10%;width:30vw;height:130vh;background:linear-gradient(180deg,#ff3b3b55,transparent 75%);transform-origin:top center;filter:blur(18px);animation:sw 7s ease-in-out infinite alternate}
+.beams i:nth-child(1){left:5%;--a:-22deg;--b:14deg}
+.beams i:nth-child(2){left:38%;--a:12deg;--b:-16deg;animation-delay:-3s;background:linear-gradient(180deg,#ffffff33,transparent 70%)}
+.beams i:nth-child(3){left:70%;--a:20deg;--b:-12deg;animation-delay:-5s}
+@keyframes sw{from{transform:rotate(var(--a))}to{transform:rotate(var(--b))}}
+main{position:relative;z-index:1}
+section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 22px;text-align:center}
+.hero h1{font-size:clamp(5rem,26vw,17rem);line-height:.9;font-weight:400;color:var(--fg);text-shadow:0 0 14px var(--glow),0 0 50px var(--red);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}12%{transform:scale(1.04)}24%{transform:scale(1)}36%{transform:scale(1.03)}}
+.hero .tag{font-size:clamp(1.1rem,3.2vw,1.7rem);color:var(--mut);letter-spacing:.35em;text-transform:uppercase;margin-top:12px}
+.hero .down{margin-top:60px;color:var(--red);font-size:2rem;animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translateY(10px)}}
+.eq{display:flex;gap:5px;align-items:flex-end;height:46px;margin-bottom:26px}
+.eq b{width:7px;background:var(--red);animation:eq 1s ease-in-out infinite alternate}
+.eq b:nth-child(2n){animation-duration:.7s}.eq b:nth-child(3n){animation-duration:1.3s}.eq b:nth-child(5n){animation-duration:.55s}
+@keyframes eq{from{height:8%}to{height:100%}}
+.txt{max-width:680px}
+.txt h2{font-size:clamp(2.4rem,8vw,4.6rem);font-weight:400;color:var(--red);margin-bottom:18px}
+.txt p{font-size:clamp(1.25rem,3.6vw,1.65rem);margin-bottom:16px;color:#e4dfd7}
+.txt em{color:var(--fg);font-style:normal;border-bottom:2px solid var(--red)}
+.list{list-style:none;max-width:640px;width:100%;margin-top:22px;text-align:left}
+.list li{display:flex;gap:20px;align-items:baseline;padding:18px 20px;margin-bottom:12px;background:var(--card);border-left:4px solid var(--red);font-size:clamp(1.15rem,3.4vw,1.5rem)}
+.list li span{font-family:"Bebas Neue",Impact,sans-serif;color:var(--red);font-size:1.8rem}
+.fin h2{font-size:clamp(3.5rem,15vw,10rem);font-weight:400;line-height:.95;text-shadow:0 0 16px var(--glow),0 0 60px var(--red)}
+.fin p{max-width:560px;font-size:clamp(1.25rem,3.6vw,1.6rem);margin:22px 0;color:#e4dfd7}
+.sig{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:1rem}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s}
+.rv.on{opacity:1;transform:none}
+#mute{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:14px;z-index:20;background:#000a;color:var(--fg);border:1px solid #fff3;padding:8px 14px;font-size:1.05rem;letter-spacing:.1em;backdrop-filter:blur(6px)}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="eq" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+  <h2 class="f">Hice esto para ti</h2>
+  <p>Ponte los audífonos. Sube el volumen.</p>
+  <button class="btn f" id="go">ENTRAR</button>
+</div>
+<button id="mute" class="f" hidden>SONIDO: ON</button>
+<div class="beams" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<main>
+  <section class="hero">
+    <p class="tag rv">Para <span id="nom"></span></p>
+    <h1 class="f rv">TE AMO</h1>
+    <p class="tag rv">y aquí estoy contigo</p>
+    <div class="down">↓</div>
+  </section>
+
+  <section>
+    <div class="txt rv">
+      <h2 class="f">Aquí estoy</h2>
+      <p>Sé que no ha sido un buen momento y que lo que pasó te hizo cabrear. No vengo a arreglarlo ni a decirte qué sentir.</p>
+      <p>Tienes todo el derecho a sentirte así. Solo quiero que sepas que <em>no estás sola</em>, y que estoy para lo que necesites, mi chiquita.</p>
+      <p>La verdad es que no supe cómo subirte el ánimo. No encontré las palabras perfectas, así que hice esto: lo único que sé hacer es decirte que te amo y quedarme contigo.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="txt rv">
+      <h2 class="f">Sin prisa</h2>
+      <p>Si hoy toca estar cabreada, está bien. Y si mañana quieres reírte, aquí estoy con mis peores chistes.</p>
+      <p>Eres más fuerte de lo que crees, y yo estoy muy orgulloso de ti, mi negra.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="txt rv"><h2 class="f">Pase lo que pase</h2><p>Tú y yo, con el volumen al máximo, mi loca.</p></div>
+  </section>
+
+  <section class="fin">
+    <div class="rv">
+      <h2 class="f">TE AMO</h2>
+      <p>Cuando quieras hablar, o cuando solo quieras compañía, aquí me tienes. Te amo, hoy y en los días difíciles.</p>
+      <div class="sig">Siempre tuyo</div>
+    </div>
+  </section>
+</main>
+
+<script>
+const NOMBRE = "mi negra"; // ← cambia esto por su nombre
+document.getElementById("nom").textContent = NOMBRE;
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* Reveal al hacer scroll */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add("on"); }), {threshold:.25});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* Sonido: balada rock sintetizada (Am – F – C – G) */
+let ctx, master, shaper, on = true, ruido;
+const BPM = 74, B = 60 / BPM;
+const acordes = [110, 87.31, 130.81, 98];
+
+function curva(k){ const n = 512, c = new Float32Array(n); for (let i = 0; i < n; i++){ const x = i * 2 / n - 1; c[i] = (1 + k) * x / (1 + k * Math.abs(x)); } return c; }
+
+function iniciar(){
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  master = ctx.createGain(); master.gain.value = .5; master.connect(ctx.destination);
+  shaper = ctx.createWaveShaper(); shaper.curve = curva(60); shaper.oversample = "4x";
+  const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2400;
+  shaper.connect(lp); lp.connect(master);
+  const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  ruido = buf;
+  ciclo(ctx.currentTime + .1);
+}
+
+function nota(f, t, dur, v){
+  [1, 1.5, 2].forEach(m => {
+    [-6, 6].forEach(det => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sawtooth"; o.frequency.value = f * m; o.detune.value = det;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .01);
+      g.gain.exponentialRampToValueAtTime(.001, t + dur);
+      o.connect(g); g.connect(shaper); o.start(t); o.stop(t + dur + .05);
+    });
+  });
+}
+
+function bombo(t){
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(40, t + .15);
+  g.gain.setValueAtTime(.9, t); g.gain.exponentialRampToValueAtTime(.001, t + .22);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t + .25);
+}
+
+function ruidoHit(t, dur, freq, v, tipo){
+  const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+  s.buffer = ruido; f.type = tipo; f.frequency.value = freq;
+  g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + .02);
+}
+
+function ciclo(t0){
+  acordes.forEach((f, c) => {
+    const tc = t0 + c * 4 * B;
+    nota(f, tc, B * 1.9, .05);
+    nota(f, tc + 2 * B, B * .9, .04);
+    nota(f, tc + 3 * B, B * .9, .04);
+    bombo(tc); bombo(tc + 2 * B);
+    ruidoHit(tc + B, .18, 1800, .5, "bandpass");
+    ruidoHit(tc + 3 * B, .18, 1800, .5, "bandpass");
+    for (let i = 0; i < 8; i++) ruidoHit(tc + i * B / 2, .05, 7000, .15, "highpass");
+  });
+  const prox = t0 + 16 * B;
+  setTimeout(() => ciclo(prox), Math.max(0, (prox - ctx.currentTime - .6) * 1000));
+}
+
+const gate = document.getElementById("gate"), mute = document.getElementById("mute");
+document.getElementById("go").onclick = () => {
+  iniciar();
+  gate.style.opacity = 0;
+  setTimeout(() => gate.remove(), 1000);
+  mute.hidden = false;
+};
+mute.onclick = () => {
+  on = !on;
+  master.gain.setTargetAtTime(on ? .5 : 0, ctx.currentTime, .05);
+  mute.textContent = "SONIDO: " + (on ? "ON" : "OFF");
+};
+</script>
+</body>
+</html>
